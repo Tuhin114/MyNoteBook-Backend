@@ -1,20 +1,24 @@
-import express from "express";
-import { port, mongoURL } from "./db.js";
-import mongoose from "mongoose";
+const express = require("express");
+const { port, mongoURL } = require("./db.js");
+const mongoose = require("mongoose");
+// const authRoutes = require("./routes/auth");
 
 const app = express();
 
+//Available routes;
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/notes", require("./routes/notes"));
+
 app.get("/", (request, response) => {
-  console.log(request);
-  return response.status(234).send("Hello World!!");
+  return response.send("Hello World!!");
 });
 
 mongoose
   .connect(mongoURL)
   .then(() => {
-    console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB successfully");
     app.listen(port, () => {
-      console.log(`App is running on port ${port}`);
+      console.log(`Server is running on port ${port}`);
     });
   })
   .catch((error) => {
