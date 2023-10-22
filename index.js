@@ -1,16 +1,16 @@
 const express = require("express");
 const { port, mongoURL } = require("./db.js");
 const mongoose = require("mongoose");
-// const authRoutes = require("./routes/auth");
-
 const app = express();
+
+app.use(express.json());
 
 //Available routes;
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/notes", require("./routes/notes"));
 
 app.get("/", (request, response) => {
-  return response.send("Hello World!!");
+  return response.send("npm run dev");
 });
 
 mongoose
