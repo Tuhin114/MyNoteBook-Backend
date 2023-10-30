@@ -1,7 +1,10 @@
 const express = require("express");
+var cors = require("cors");
 const { port, mongoURL } = require("./db.js");
 const mongoose = require("mongoose");
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
